@@ -41,7 +41,7 @@ def run(args):
             # Loop again
             next_link[0].click()
 
-            time.sleep(5) # For javascript next links
+            time.sleep(args.next_sleep)
 
 
         for link in links:
@@ -87,6 +87,14 @@ def main():
             help="Use webpage title as filename for saved webpages")
     parser.add_argument("--next-css", "-n", type=str, default=None,
             help="CSS selector of \"Next\" page to continually click on")
+
+    # Sleep
+    parser.add_argument("--next-sleep", "-nsl", metavar="SECONDS",
+            type=float, default=0,
+            help=("Number of seconds to wait after clicking \"Next\". "
+                "This is needed for javascript links as otherwise, "
+                "the browser cannot tell if the page has finished "
+                "loading. Default: 0"))
 
     # Output
     parser.add_argument("output_dir", metavar="OUTPUT_DIR",
